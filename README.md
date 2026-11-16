@@ -22,13 +22,11 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Aliviya | 2501010049 | aliviya15 |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
-
+**Team No.:** T0149
+**Section:** B
+**Repository URL:** https://github.com/aliviya15/DE_Project_2026
 ---
 
 ## How this project works
