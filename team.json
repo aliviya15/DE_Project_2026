@@ -7,6 +7,6 @@
     "github": "aliviya15"
   },
   "members": [],
-  "postgres_version": "",
+  "postgres_version": "PostgreSQL 17.12",
   "laptop_used_for_benchmarks": "MacBook Pro 14-inch, Apple M4, 16 GB RAM"
 }
