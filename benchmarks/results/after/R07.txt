@@ -1,0 +1,102 @@
+=== R07 run 1 ===
+Sort  (cost=1469.42..1469.54 rows=48 width=25) (actual time=1.416..1.417 rows=41.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=1033
+  ->  GroupAggregate  (cost=1465.97..1468.08 rows=48 width=25) (actual time=1.397..1.408 rows=41.00 loops=1)
+        Group Key: ba.bank_name, t.failure_code
+        Buffers: shared hit=1030
+        ->  Sort  (cost=1465.97..1466.37 rows=163 width=17) (actual time=1.393..1.395 rows=135.00 loops=1)
+              Sort Key: ba.bank_name, t.failure_code
+              Sort Method: quicksort  Memory: 29kB
+              Buffers: shared hit=1030
+              ->  Nested Loop  (cost=1.12..1459.98 rows=163 width=17) (actual time=0.037..1.341 rows=135.00 loops=1)
+                    Buffers: shared hit=1027
+                    ->  Nested Loop  (cost=0.83..1400.81 rows=163 width=7) (actual time=0.023..0.841 rows=135.00 loops=1)
+                          Buffers: shared hit=622
+                          ->  Index Scan using idx_transactions_initiated_desc on transactions t  (cost=0.42..246.31 rows=163 width=27) (actual time=0.015..0.242 rows=135.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                Filter: ((status)::text = 'FAILED'::text)
+                                Rows Removed by Filter: 3076
+                                Index Searches: 1
+                                Buffers: shared hit=82
+                          ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..7.08 rows=1 width=28) (actual time=0.004..0.004 rows=1.00 loops=135)
+                                Index Cond: ((vpa)::text = (t.payer_vpa)::text)
+                                Index Searches: 135
+                                Buffers: shared hit=540
+                    ->  Index Scan using bank_accounts_pkey on bank_accounts ba  (cost=0.29..0.36 rows=1 width=18) (actual time=0.004..0.004 rows=1.00 loops=135)
+                          Index Cond: (account_id = v.account_id)
+                          Index Searches: 135
+                          Buffers: shared hit=405
+Planning:
+  Buffers: shared hit=571 read=1
+Planning Time: 1.045 ms
+Execution Time: 1.442 ms
+=== R07 run 2 ===
+Sort  (cost=1469.42..1469.54 rows=48 width=25) (actual time=0.860..0.861 rows=41.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=1033
+  ->  GroupAggregate  (cost=1465.97..1468.08 rows=48 width=25) (actual time=0.842..0.853 rows=41.00 loops=1)
+        Group Key: ba.bank_name, t.failure_code
+        Buffers: shared hit=1030
+        ->  Sort  (cost=1465.97..1466.37 rows=163 width=17) (actual time=0.838..0.841 rows=135.00 loops=1)
+              Sort Key: ba.bank_name, t.failure_code
+              Sort Method: quicksort  Memory: 29kB
+              Buffers: shared hit=1030
+              ->  Nested Loop  (cost=1.12..1459.98 rows=163 width=17) (actual time=0.025..0.784 rows=135.00 loops=1)
+                    Buffers: shared hit=1027
+                    ->  Nested Loop  (cost=0.83..1400.81 rows=163 width=7) (actual time=0.020..0.553 rows=135.00 loops=1)
+                          Buffers: shared hit=622
+                          ->  Index Scan using idx_transactions_initiated_desc on transactions t  (cost=0.42..246.31 rows=163 width=27) (actual time=0.015..0.240 rows=135.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                Filter: ((status)::text = 'FAILED'::text)
+                                Rows Removed by Filter: 3076
+                                Index Searches: 1
+                                Buffers: shared hit=82
+                          ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..7.08 rows=1 width=28) (actual time=0.002..0.002 rows=1.00 loops=135)
+                                Index Cond: ((vpa)::text = (t.payer_vpa)::text)
+                                Index Searches: 135
+                                Buffers: shared hit=540
+                    ->  Index Scan using bank_accounts_pkey on bank_accounts ba  (cost=0.29..0.36 rows=1 width=18) (actual time=0.002..0.002 rows=1.00 loops=135)
+                          Index Cond: (account_id = v.account_id)
+                          Index Searches: 135
+                          Buffers: shared hit=405
+Planning:
+  Buffers: shared hit=572
+Planning Time: 0.734 ms
+Execution Time: 0.884 ms
+=== R07 run 3 ===
+Sort  (cost=1469.42..1469.54 rows=48 width=25) (actual time=0.861..0.862 rows=41.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=1033
+  ->  GroupAggregate  (cost=1465.97..1468.08 rows=48 width=25) (actual time=0.842..0.853 rows=41.00 loops=1)
+        Group Key: ba.bank_name, t.failure_code
+        Buffers: shared hit=1030
+        ->  Sort  (cost=1465.97..1466.37 rows=163 width=17) (actual time=0.839..0.842 rows=135.00 loops=1)
+              Sort Key: ba.bank_name, t.failure_code
+              Sort Method: quicksort  Memory: 29kB
+              Buffers: shared hit=1030
+              ->  Nested Loop  (cost=1.12..1459.98 rows=163 width=17) (actual time=0.025..0.790 rows=135.00 loops=1)
+                    Buffers: shared hit=1027
+                    ->  Nested Loop  (cost=0.83..1400.81 rows=163 width=7) (actual time=0.020..0.552 rows=135.00 loops=1)
+                          Buffers: shared hit=622
+                          ->  Index Scan using idx_transactions_initiated_desc on transactions t  (cost=0.42..246.31 rows=163 width=27) (actual time=0.015..0.239 rows=135.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                Filter: ((status)::text = 'FAILED'::text)
+                                Rows Removed by Filter: 3076
+                                Index Searches: 1
+                                Buffers: shared hit=82
+                          ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..7.08 rows=1 width=28) (actual time=0.002..0.002 rows=1.00 loops=135)
+                                Index Cond: ((vpa)::text = (t.payer_vpa)::text)
+                                Index Searches: 135
+                                Buffers: shared hit=540
+                    ->  Index Scan using bank_accounts_pkey on bank_accounts ba  (cost=0.29..0.36 rows=1 width=18) (actual time=0.002..0.002 rows=1.00 loops=135)
+                          Index Cond: (account_id = v.account_id)
+                          Index Searches: 135
+                          Buffers: shared hit=405
+Planning:
+  Buffers: shared hit=572
+Planning Time: 0.737 ms
+Execution Time: 0.885 ms

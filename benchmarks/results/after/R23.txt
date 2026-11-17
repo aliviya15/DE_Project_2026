@@ -1,0 +1,30 @@
+=== R23 run 1 ===
+Limit  (cost=8988.20..8989.32 rows=25 width=46) (actual time=18.422..18.424 rows=25.00 loops=1)
+  Buffers: shared hit=4925
+  ->  Index Scan using idx_transactions_initiated_desc on transactions  (cost=0.42..11256.17 rows=250468 width=46) (actual time=0.007..15.277 rows=200025.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=4925
+Planning:
+  Buffers: shared hit=261
+Planning Time: 0.366 ms
+Execution Time: 18.434 ms
+=== R23 run 2 ===
+Limit  (cost=8988.20..8989.32 rows=25 width=46) (actual time=18.580..18.583 rows=25.00 loops=1)
+  Buffers: shared hit=4925
+  ->  Index Scan using idx_transactions_initiated_desc on transactions  (cost=0.42..11256.17 rows=250468 width=46) (actual time=0.008..15.545 rows=200025.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=4925
+Planning:
+  Buffers: shared hit=261
+Planning Time: 0.374 ms
+Execution Time: 18.593 ms
+=== R23 run 3 ===
+Limit  (cost=8988.20..8989.32 rows=25 width=46) (actual time=18.794..18.797 rows=25.00 loops=1)
+  Buffers: shared hit=4925
+  ->  Index Scan using idx_transactions_initiated_desc on transactions  (cost=0.42..11256.17 rows=250468 width=46) (actual time=0.007..15.703 rows=200025.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=4925
+Planning:
+  Buffers: shared hit=261
+Planning Time: 0.375 ms
+Execution Time: 18.808 ms

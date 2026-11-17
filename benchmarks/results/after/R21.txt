@@ -1,0 +1,45 @@
+=== R21 run 1 ===
+Limit  (cost=81.05..81.11 rows=25 width=47) (actual time=0.996..0.998 rows=25.00 loops=1)
+  Buffers: shared hit=38
+  ->  Sort  (cost=81.05..81.81 rows=303 width=47) (actual time=0.996..0.996 rows=25.00 loops=1)
+        Sort Key: merchant_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=38
+        ->  Seq Scan on merchants  (cost=0.00..72.50 rows=303 width=47) (actual time=0.007..0.935 rows=300.00 loops=1)
+              Filter: ((merchant_name)::text ~~* '%chai%'::text)
+              Rows Removed by Filter: 2700
+              Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.249 ms
+Execution Time: 1.007 ms
+=== R21 run 2 ===
+Limit  (cost=81.05..81.11 rows=25 width=47) (actual time=0.982..0.984 rows=25.00 loops=1)
+  Buffers: shared hit=38
+  ->  Sort  (cost=81.05..81.81 rows=303 width=47) (actual time=0.982..0.983 rows=25.00 loops=1)
+        Sort Key: merchant_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=38
+        ->  Seq Scan on merchants  (cost=0.00..72.50 rows=303 width=47) (actual time=0.007..0.922 rows=300.00 loops=1)
+              Filter: ((merchant_name)::text ~~* '%chai%'::text)
+              Rows Removed by Filter: 2700
+              Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.243 ms
+Execution Time: 0.993 ms
+=== R21 run 3 ===
+Limit  (cost=81.05..81.11 rows=25 width=47) (actual time=0.968..0.970 rows=25.00 loops=1)
+  Buffers: shared hit=38
+  ->  Sort  (cost=81.05..81.81 rows=303 width=47) (actual time=0.968..0.968 rows=25.00 loops=1)
+        Sort Key: merchant_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=38
+        ->  Seq Scan on merchants  (cost=0.00..72.50 rows=303 width=47) (actual time=0.007..0.907 rows=300.00 loops=1)
+              Filter: ((merchant_name)::text ~~* '%chai%'::text)
+              Rows Removed by Filter: 2700
+              Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.251 ms
+Execution Time: 0.978 ms

@@ -1,0 +1,111 @@
+=== R14 run 1 ===
+Sort  (cost=36.61..36.61 rows=1 width=44) (actual time=0.082..0.082 rows=3.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=38
+  ->  GroupAggregate  (cost=36.57..36.60 rows=1 width=44) (actual time=0.075..0.076 rows=3.00 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=35
+        ->  Sort  (cost=36.57..36.58 rows=1 width=10) (actual time=0.070..0.070 rows=4.00 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=35
+              ->  Nested Loop  (cost=5.04..36.56 rows=1 width=10) (actual time=0.034..0.064 rows=4.00 loops=1)
+                    Buffers: shared hit=32
+                    ->  Nested Loop  (cost=4.76..36.26 rows=1 width=10) (actual time=0.030..0.048 rows=11.00 loops=1)
+                          Buffers: shared hit=20
+                          ->  Index Scan using idx_vpas_user on vpas v  (cost=0.29..8.31 rows=1 width=24) (actual time=0.004..0.005 rows=2.00 loops=1)
+                                Index Cond: (user_id = 15177)
+                                Index Searches: 1
+                                Buffers: shared hit=3
+                          ->  Bitmap Heap Scan on transactions t  (cost=4.47..27.94 rows=2 width=34) (actual time=0.012..0.021 rows=5.50 loops=2)
+                                Recheck Cond: (((v.vpa)::text = (payer_vpa)::text) AND ((status)::text = 'SUCCESS'::text))
+                                Filter: (EXTRACT(year FROM initiated_at) >= '2025'::numeric)
+                                Heap Blocks: exact=11
+                                Buffers: shared hit=17
+                                ->  Bitmap Index Scan on idx_transactions_success_pair_time  (cost=0.00..4.46 rows=6 width=0) (actual time=0.004..0.004 rows=5.50 loops=2)
+                                      Index Cond: ((payer_vpa)::text = (v.vpa)::text)
+                                      Index Searches: 2
+                                      Buffers: shared hit=6
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..0.30 rows=1 width=8) (actual time=0.001..0.001 rows=0.36 loops=11)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Index Searches: 4
+                          Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=522
+Planning Time: 0.917 ms
+Execution Time: 0.111 ms
+=== R14 run 2 ===
+Sort  (cost=36.61..36.61 rows=1 width=44) (actual time=0.070..0.070 rows=3.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=38
+  ->  GroupAggregate  (cost=36.57..36.60 rows=1 width=44) (actual time=0.063..0.064 rows=3.00 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=35
+        ->  Sort  (cost=36.57..36.58 rows=1 width=10) (actual time=0.058..0.059 rows=4.00 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=35
+              ->  Nested Loop  (cost=5.04..36.56 rows=1 width=10) (actual time=0.031..0.053 rows=4.00 loops=1)
+                    Buffers: shared hit=32
+                    ->  Nested Loop  (cost=4.76..36.26 rows=1 width=10) (actual time=0.028..0.044 rows=11.00 loops=1)
+                          Buffers: shared hit=20
+                          ->  Index Scan using idx_vpas_user on vpas v  (cost=0.29..8.31 rows=1 width=24) (actual time=0.003..0.004 rows=2.00 loops=1)
+                                Index Cond: (user_id = 15177)
+                                Index Searches: 1
+                                Buffers: shared hit=3
+                          ->  Bitmap Heap Scan on transactions t  (cost=4.47..27.94 rows=2 width=34) (actual time=0.012..0.019 rows=5.50 loops=2)
+                                Recheck Cond: (((v.vpa)::text = (payer_vpa)::text) AND ((status)::text = 'SUCCESS'::text))
+                                Filter: (EXTRACT(year FROM initiated_at) >= '2025'::numeric)
+                                Heap Blocks: exact=11
+                                Buffers: shared hit=17
+                                ->  Bitmap Index Scan on idx_transactions_success_pair_time  (cost=0.00..4.46 rows=6 width=0) (actual time=0.004..0.004 rows=5.50 loops=2)
+                                      Index Cond: ((payer_vpa)::text = (v.vpa)::text)
+                                      Index Searches: 2
+                                      Buffers: shared hit=6
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..0.30 rows=1 width=8) (actual time=0.001..0.001 rows=0.36 loops=11)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Index Searches: 4
+                          Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=522
+Planning Time: 0.807 ms
+Execution Time: 0.096 ms
+=== R14 run 3 ===
+Sort  (cost=36.61..36.61 rows=1 width=44) (actual time=0.066..0.066 rows=3.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=38
+  ->  GroupAggregate  (cost=36.57..36.60 rows=1 width=44) (actual time=0.060..0.060 rows=3.00 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=35
+        ->  Sort  (cost=36.57..36.58 rows=1 width=10) (actual time=0.055..0.056 rows=4.00 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=35
+              ->  Nested Loop  (cost=5.04..36.56 rows=1 width=10) (actual time=0.028..0.050 rows=4.00 loops=1)
+                    Buffers: shared hit=32
+                    ->  Nested Loop  (cost=4.76..36.26 rows=1 width=10) (actual time=0.025..0.041 rows=11.00 loops=1)
+                          Buffers: shared hit=20
+                          ->  Index Scan using idx_vpas_user on vpas v  (cost=0.29..8.31 rows=1 width=24) (actual time=0.004..0.004 rows=2.00 loops=1)
+                                Index Cond: (user_id = 15177)
+                                Index Searches: 1
+                                Buffers: shared hit=3
+                          ->  Bitmap Heap Scan on transactions t  (cost=4.47..27.94 rows=2 width=34) (actual time=0.010..0.018 rows=5.50 loops=2)
+                                Recheck Cond: (((v.vpa)::text = (payer_vpa)::text) AND ((status)::text = 'SUCCESS'::text))
+                                Filter: (EXTRACT(year FROM initiated_at) >= '2025'::numeric)
+                                Heap Blocks: exact=11
+                                Buffers: shared hit=17
+                                ->  Bitmap Index Scan on idx_transactions_success_pair_time  (cost=0.00..4.46 rows=6 width=0) (actual time=0.003..0.003 rows=5.50 loops=2)
+                                      Index Cond: ((payer_vpa)::text = (v.vpa)::text)
+                                      Index Searches: 2
+                                      Buffers: shared hit=6
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..0.30 rows=1 width=8) (actual time=0.001..0.001 rows=0.36 loops=11)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Index Searches: 4
+                          Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=522
+Planning Time: 0.745 ms
+Execution Time: 0.099 ms

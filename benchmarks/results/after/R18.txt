@@ -1,0 +1,105 @@
+=== R18 run 1 ===
+Sort  (cost=8137.58..8140.88 rows=1320 width=56) (actual time=43.815..43.862 rows=2882.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 247kB
+  Buffers: shared hit=39960 read=1506
+  ->  HashAggregate  (cost=8009.75..8069.16 rows=1320 width=56) (actual time=42.915..43.416 rows=2882.00 loops=1)
+        Group Key: u.user_id
+        Filter: (sum(t.amount) >= '10000'::numeric)
+        Batches: 1  Memory Usage: 1681kB
+        Rows Removed by Filter: 1028
+        Buffers: shared hit=39957 read=1506
+        ->  Nested Loop  (cost=1058.18..7896.89 rows=22571 width=30) (actual time=2.306..40.690 rows=22903.00 loops=1)
+              Buffers: shared hit=39957 read=1506
+              ->  Hash Join  (cost=1057.76..2259.10 rows=5175 width=48) (actual time=2.298..6.606 rows=5237.00 loops=1)
+                    Hash Cond: (v.user_id = u.user_id)
+                    Buffers: shared hit=1026
+                    ->  Seq Scan on vpas v  (cost=0.00..1061.33 rows=53333 width=28) (actual time=0.009..1.671 rows=53333.00 loops=1)
+                          Buffers: shared hit=528
+                    ->  Hash  (cost=1008.25..1008.25 rows=3961 width=24) (actual time=2.284..2.284 rows=3924.00 loops=1)
+                          Buckets: 4096  Batches: 1  Memory Usage: 249kB
+                          Buffers: shared hit=498
+                          ->  Seq Scan on users u  (cost=0.00..1008.25 rows=3961 width=24) (actual time=0.005..2.068 rows=3924.00 loops=1)
+                                Filter: ((kyc_status)::text <> 'VERIFIED'::text)
+                                Rows Removed by Filter: 36076
+                                Buffers: shared hit=498
+              ->  Index Scan using idx_transactions_payer_time on transactions t  (cost=0.42..1.03 rows=6 width=30) (actual time=0.004..0.006 rows=4.37 loops=5237)
+                    Index Cond: ((payer_vpa)::text = (v.vpa)::text)
+                    Filter: ((status)::text = 'SUCCESS'::text)
+                    Rows Removed by Filter: 0
+                    Index Searches: 5237
+                    Buffers: shared hit=38931 read=1506
+Planning:
+  Buffers: shared hit=494
+Planning Time: 0.792 ms
+Execution Time: 43.950 ms
+=== R18 run 2 ===
+Sort  (cost=8137.58..8140.88 rows=1320 width=56) (actual time=23.069..23.117 rows=2882.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 247kB
+  Buffers: shared hit=41466
+  ->  HashAggregate  (cost=8009.75..8069.16 rows=1320 width=56) (actual time=22.221..22.676 rows=2882.00 loops=1)
+        Group Key: u.user_id
+        Filter: (sum(t.amount) >= '10000'::numeric)
+        Batches: 1  Memory Usage: 1681kB
+        Rows Removed by Filter: 1028
+        Buffers: shared hit=41463
+        ->  Nested Loop  (cost=1058.18..7896.89 rows=22571 width=30) (actual time=1.996..20.271 rows=22903.00 loops=1)
+              Buffers: shared hit=41463
+              ->  Hash Join  (cost=1057.76..2259.10 rows=5175 width=48) (actual time=1.989..5.433 rows=5237.00 loops=1)
+                    Hash Cond: (v.user_id = u.user_id)
+                    Buffers: shared hit=1026
+                    ->  Seq Scan on vpas v  (cost=0.00..1061.33 rows=53333 width=28) (actual time=0.002..1.183 rows=53333.00 loops=1)
+                          Buffers: shared hit=528
+                    ->  Hash  (cost=1008.25..1008.25 rows=3961 width=24) (actual time=1.981..1.982 rows=3924.00 loops=1)
+                          Buckets: 4096  Batches: 1  Memory Usage: 249kB
+                          Buffers: shared hit=498
+                          ->  Seq Scan on users u  (cost=0.00..1008.25 rows=3961 width=24) (actual time=0.004..1.765 rows=3924.00 loops=1)
+                                Filter: ((kyc_status)::text <> 'VERIFIED'::text)
+                                Rows Removed by Filter: 36076
+                                Buffers: shared hit=498
+              ->  Index Scan using idx_transactions_payer_time on transactions t  (cost=0.42..1.03 rows=6 width=30) (actual time=0.001..0.003 rows=4.37 loops=5237)
+                    Index Cond: ((payer_vpa)::text = (v.vpa)::text)
+                    Filter: ((status)::text = 'SUCCESS'::text)
+                    Rows Removed by Filter: 0
+                    Index Searches: 5237
+                    Buffers: shared hit=40437
+Planning:
+  Buffers: shared hit=494
+Planning Time: 0.761 ms
+Execution Time: 23.201 ms
+=== R18 run 3 ===
+Sort  (cost=8137.58..8140.88 rows=1320 width=56) (actual time=23.352..23.399 rows=2882.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 247kB
+  Buffers: shared hit=41466
+  ->  HashAggregate  (cost=8009.75..8069.16 rows=1320 width=56) (actual time=22.518..22.968 rows=2882.00 loops=1)
+        Group Key: u.user_id
+        Filter: (sum(t.amount) >= '10000'::numeric)
+        Batches: 1  Memory Usage: 1681kB
+        Rows Removed by Filter: 1028
+        Buffers: shared hit=41463
+        ->  Nested Loop  (cost=1058.18..7896.89 rows=22571 width=30) (actual time=1.989..20.551 rows=22903.00 loops=1)
+              Buffers: shared hit=41463
+              ->  Hash Join  (cost=1057.76..2259.10 rows=5175 width=48) (actual time=1.982..5.482 rows=5237.00 loops=1)
+                    Hash Cond: (v.user_id = u.user_id)
+                    Buffers: shared hit=1026
+                    ->  Seq Scan on vpas v  (cost=0.00..1061.33 rows=53333 width=28) (actual time=0.002..1.197 rows=53333.00 loops=1)
+                          Buffers: shared hit=528
+                    ->  Hash  (cost=1008.25..1008.25 rows=3961 width=24) (actual time=1.974..1.975 rows=3924.00 loops=1)
+                          Buckets: 4096  Batches: 1  Memory Usage: 249kB
+                          Buffers: shared hit=498
+                          ->  Seq Scan on users u  (cost=0.00..1008.25 rows=3961 width=24) (actual time=0.003..1.753 rows=3924.00 loops=1)
+                                Filter: ((kyc_status)::text <> 'VERIFIED'::text)
+                                Rows Removed by Filter: 36076
+                                Buffers: shared hit=498
+              ->  Index Scan using idx_transactions_payer_time on transactions t  (cost=0.42..1.03 rows=6 width=30) (actual time=0.001..0.003 rows=4.37 loops=5237)
+                    Index Cond: ((payer_vpa)::text = (v.vpa)::text)
+                    Filter: ((status)::text = 'SUCCESS'::text)
+                    Rows Removed by Filter: 0
+                    Index Searches: 5237
+                    Buffers: shared hit=40437
+Planning:
+  Buffers: shared hit=494
+Planning Time: 0.775 ms
+Execution Time: 23.484 ms
