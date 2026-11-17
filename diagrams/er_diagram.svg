@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1120" viewBox="0 0 1500 1120">
+<style>
+.title{font: bold 30px Arial;fill:#17365d}
+.subtitle{font:16px Arial;fill:#555}
+.box{fill:#f5f8ff;stroke:#315b91;stroke-width:2;rx:12}
+.head{fill:#315b91}
+.name{font:bold 19px Arial;fill:white}
+.field{font:15px Arial;fill:#172b4d}
+.rel{font:16px Arial;fill:#172b4d}
+.note{font:14px Arial;fill:#555}
+</style>
+<rect width="1500" height="1120" fill="white"/>
+<text x="750" y="48" text-anchor="middle" class="title">Google Pay Digital Payments — ER Diagram</text>
+<text x="750" y="76" text-anchor="middle" class="subtitle">PostgreSQL schema: qpay | PK = Primary Key | FK = Foreign Key</text>
+
+<!-- Cities -->
+<rect x="40" y="115" width="270" height="155" class="box"/>
+<rect x="40" y="115" width="270" height="36" class="head"/>
+<text x="175" y="140" text-anchor="middle" class="name">CITIES</text>
+<text x="58" y="177" class="field">PK city_id</text>
+<text x="58" y="202" class="field">city_name</text>
+<text x="58" y="227" class="field">state</text>
+
+<!-- Users -->
+<rect x="390" y="115" width="300" height="205" class="box"/>
+<rect x="390" y="115" width="300" height="36" class="head"/>
+<text x="540" y="140" text-anchor="middle" class="name">USERS</text>
+<text x="408" y="177" class="field">PK user_id</text>
+<text x="408" y="202" class="field">FK city_id</text>
+<text x="408" y="227" class="field">full_name, phone_number</text>
+<text x="408" y="252" class="field">email, kyc_status</text>
+<text x="408" y="277" class="field">is_blocked, created_at</text>
+
+<!-- Bank accounts -->
+<rect x="770" y="115" width="300" height="205" class="box"/>
+<rect x="770" y="115" width="300" height="36" class="head"/>
+<text x="920" y="140" text-anchor="middle" class="name">BANK_ACCOUNTS</text>
+<text x="788" y="177" class="field">PK account_id</text>
+<text x="788" y="202" class="field">FK user_id</text>
+<text x="788" y="227" class="field">bank_name, ifsc</text>
+<text x="788" y="252" class="field">account_last4, account_type</text>
+<text x="788" y="277" class="field">is_primary, linked_at</text>
+
+<!-- VPAs -->
+<rect x="1150" y="115" width="300" height="205" class="box"/>
+<rect x="1150" y="115" width="300" height="36" class="head"/>
+<text x="1300" y="140" text-anchor="middle" class="name">VPAS</text>
+<text x="1168" y="177" class="field">PK vpa</text>
+<text x="1168" y="202" class="field">FK user_id</text>
+<text x="1168" y="227" class="field">FK account_id</text>
+<text x="1168" y="252" class="field">is_active</text>
+<text x="1168" y="277" class="field">created_at</text>
+
+<!-- Merchants -->
+<rect x="40" y="390" width="300" height="205" class="box"/>
+<rect x="40" y="390" width="300" height="36" class="head"/>
+<text x="190" y="415" text-anchor="middle" class="name">MERCHANTS</text>
+<text x="58" y="452" class="field">PK merchant_id</text>
+<text x="58" y="477" class="field">FK city_id</text>
+<text x="58" y="502" class="field">merchant_name, mcc</text>
+<text x="58" y="527" class="field">merchant_vpa</text>
+<text x="58" y="552" class="field">is_verified, onboarded_on</text>
+
+<!-- Transactions -->
+<rect x="430" y="390" width="350" height="255" class="box"/>
+<rect x="430" y="390" width="350" height="36" class="head"/>
+<text x="605" y="415" text-anchor="middle" class="name">TRANSACTIONS</text>
+<text x="448" y="452" class="field">PK txn_id</text>
+<text x="448" y="477" class="field">FK merchant_id</text>
+<text x="448" y="502" class="field">upi_ref, txn_type</text>
+<text x="448" y="527" class="field">payer_vpa, payee_vpa</text>
+<text x="448" y="552" class="field">amount, note, status</text>
+<text x="448" y="577" class="field">initiated_at, completed_at</text>
+<text x="448" y="602" class="field">failure_code</text>
+
+<!-- Bill payments -->
+<rect x="880" y="390" width="300" height="205" class="box"/>
+<rect x="880" y="390" width="300" height="36" class="head"/>
+<text x="1030" y="415" text-anchor="middle" class="name">BILL_PAYMENTS</text>
+<text x="898" y="452" class="field">PK bill_id</text>
+<text x="898" y="477" class="field">FK user_id</text>
+<text x="898" y="502" class="field">biller_category, biller_name</text>
+<text x="898" y="527" class="field">consumer_number, amount</text>
+<text x="898" y="552" class="field">due_date, status, paid_at</text>
+
+<!-- Disputes -->
+<rect x="40" y="700" width="300" height="205" class="box"/>
+<rect x="40" y="700" width="300" height="36" class="head"/>
+<text x="190" y="725" text-anchor="middle" class="name">DISPUTES</text>
+<text x="58" y="762" class="field">PK dispute_id</text>
+<text x="58" y="787" class="field">FK txn_id</text>
+<text x="58" y="812" class="field">raised_by, reason</text>
+<text x="58" y="837" class="field">raised_at, status</text>
+<text x="58" y="862" class="field">resolved_at</text>
+
+<!-- Rewards -->
+<rect x="430" y="700" width="350" height="205" class="box"/>
+<rect x="430" y="700" width="350" height="36" class="head"/>
+<text x="605" y="725" text-anchor="middle" class="name">REWARDS</text>
+<text x="448" y="762" class="field">PK reward_id</text>
+<text x="448" y="787" class="field">FK user_id</text>
+<text x="448" y="812" class="field">FK txn_id</text>
+<text x="448" y="837" class="field">reward_type, amount, status</text>
+<text x="448" y="862" class="field">issued_at, expires_at, credited_at</text>
+
+<!-- Relationships -->
+<rect x="830" y="680" width="620" height="300" class="box"/>
+<text x="860" y="720" class="name" style="fill:#17365d">RELATIONSHIPS (1 : MANY)</text>
+<text x="860" y="760" class="rel">CITIES → USERS</text>
+<text x="860" y="795" class="rel">CITIES → MERCHANTS</text>
+<text x="860" y="830" class="rel">USERS → BANK_ACCOUNTS</text>
+<text x="860" y="865" class="rel">USERS → VPAS</text>
+<text x="860" y="900" class="rel">BANK_ACCOUNTS → VPAS</text>
+<text x="860" y="935" class="rel">MERCHANTS → TRANSACTIONS</text>
+<text x="1120" y="760" class="rel">USERS → BILL_PAYMENTS</text>
+<text x="1120" y="795" class="rel">TRANSACTIONS → DISPUTES</text>
+<text x="1120" y="830" class="rel">USERS → REWARDS</text>
+<text x="1120" y="865" class="rel">TRANSACTIONS → REWARDS</text>
+
+<text x="50" y="1030" class="note">Note: payer_vpa, payee_vpa and raised_by are not declared as foreign keys in the supplied SQL schema.</text>
+<text x="50" y="1055" class="note">The diagram represents the declared primary keys and foreign-key relationships in sql/01_schema.sql.</text>
+</svg>

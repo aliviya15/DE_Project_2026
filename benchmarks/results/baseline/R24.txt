@@ -1,0 +1,39 @@
+=== R24 run 1 ===
+Gather  (cost=1000.00..6920.62 rows=1 width=85) (actual time=2.735..5.142 rows=1.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=4616
+  ->  Parallel Seq Scan on transactions  (cost=0.00..5920.52 rows=1 width=85) (actual time=2.758..3.330 rows=0.33 loops=3)
+        Filter: ((upi_ref)::text = '600977648064'::text)
+        Rows Removed by Filter: 83489
+        Buffers: shared hit=4616
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.170 ms
+Execution Time: 5.159 ms
+=== R24 run 2 ===
+Gather  (cost=1000.00..6920.62 rows=1 width=85) (actual time=4.420..5.030 rows=1.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=4616
+  ->  Parallel Seq Scan on transactions  (cost=0.00..5920.52 rows=1 width=85) (actual time=2.756..3.322 rows=0.33 loops=3)
+        Filter: ((upi_ref)::text = '600977648064'::text)
+        Rows Removed by Filter: 83489
+        Buffers: shared hit=4616
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.166 ms
+Execution Time: 5.049 ms
+=== R24 run 3 ===
+Gather  (cost=1000.00..6920.62 rows=1 width=85) (actual time=2.649..4.917 rows=1.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=4616
+  ->  Parallel Seq Scan on transactions  (cost=0.00..5920.52 rows=1 width=85) (actual time=2.722..3.276 rows=0.33 loops=3)
+        Filter: ((upi_ref)::text = '600977648064'::text)
+        Rows Removed by Filter: 83489
+        Buffers: shared hit=4616
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.151 ms
+Execution Time: 4.932 ms

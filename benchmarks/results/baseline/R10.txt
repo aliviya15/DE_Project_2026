@@ -1,0 +1,39 @@
+=== R10 run 1 ===
+Sort  (cost=1225.01..1225.02 rows=1 width=35) (actual time=1.637..1.637 rows=2.00 loops=1)
+  Sort Key: expires_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=522
+  ->  Seq Scan on rewards  (cost=0.00..1225.00 rows=1 width=35) (actual time=1.569..1.629 rows=2.00 loops=1)
+        Filter: ((expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone) AND (user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text))
+        Rows Removed by Filter: 39797
+        Buffers: shared hit=519
+Planning:
+  Buffers: shared hit=108 dirtied=3
+Planning Time: 0.228 ms
+Execution Time: 1.654 ms
+=== R10 run 2 ===
+Sort  (cost=1225.01..1225.02 rows=1 width=35) (actual time=1.620..1.620 rows=2.00 loops=1)
+  Sort Key: expires_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=522
+  ->  Seq Scan on rewards  (cost=0.00..1225.00 rows=1 width=35) (actual time=1.549..1.612 rows=2.00 loops=1)
+        Filter: ((expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone) AND (user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text))
+        Rows Removed by Filter: 39797
+        Buffers: shared hit=519
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.162 ms
+Execution Time: 1.636 ms
+=== R10 run 3 ===
+Sort  (cost=1225.01..1225.02 rows=1 width=35) (actual time=1.565..1.565 rows=2.00 loops=1)
+  Sort Key: expires_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=522
+  ->  Seq Scan on rewards  (cost=0.00..1225.00 rows=1 width=35) (actual time=1.498..1.557 rows=2.00 loops=1)
+        Filter: ((expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone) AND (user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text))
+        Rows Removed by Filter: 39797
+        Buffers: shared hit=519
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.161 ms
+Execution Time: 1.580 ms
