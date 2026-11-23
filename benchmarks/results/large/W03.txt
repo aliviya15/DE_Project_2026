@@ -1,0 +1,54 @@
+=== W03 run 1 ===
+Update on rewards  (cost=8.61..16.63 rows=0 width=0) (actual time=0.116..0.117 rows=0.00 loops=1)
+  Buffers: shared hit=25 dirtied=4
+  InitPlan 1
+    ->  Aggregate  (cost=8.31..8.32 rows=1 width=8) (actual time=0.012..0.012 rows=1.00 loops=1)
+          Buffers: shared hit=4
+          ->  Index Scan using idx_rewards_user_status_expiry on rewards rewards_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.009..0.009 rows=2.00 loops=1)
+                Index Cond: ((user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text))
+                Index Searches: 1
+                Buffers: shared hit=4
+  ->  Index Scan using rewards_pkey on rewards  (cost=0.29..8.31 rows=1 width=72) (actual time=0.021..0.022 rows=1.00 loops=1)
+        Index Cond: (reward_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=9
+Planning:
+  Buffers: shared hit=169
+Planning Time: 0.307 ms
+Execution Time: 0.170 ms
+=== W03 run 2 ===
+Update on rewards  (cost=8.61..16.63 rows=0 width=0) (actual time=0.097..0.098 rows=0.00 loops=1)
+  Buffers: shared hit=25
+  InitPlan 1
+    ->  Aggregate  (cost=8.31..8.32 rows=1 width=8) (actual time=0.015..0.015 rows=1.00 loops=1)
+          Buffers: shared hit=4
+          ->  Index Scan using idx_rewards_user_status_expiry on rewards rewards_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.011..0.012 rows=2.00 loops=1)
+                Index Cond: ((user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text))
+                Index Searches: 1
+                Buffers: shared hit=4
+  ->  Index Scan using rewards_pkey on rewards  (cost=0.29..8.31 rows=1 width=72) (actual time=0.024..0.025 rows=1.00 loops=1)
+        Index Cond: (reward_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=9
+Planning:
+  Buffers: shared hit=169
+Planning Time: 0.273 ms
+Execution Time: 0.154 ms
+=== W03 run 3 ===
+Update on rewards  (cost=8.61..16.63 rows=0 width=0) (actual time=0.088..0.088 rows=0.00 loops=1)
+  Buffers: shared hit=25
+  InitPlan 1
+    ->  Aggregate  (cost=8.31..8.32 rows=1 width=8) (actual time=0.012..0.012 rows=1.00 loops=1)
+          Buffers: shared hit=4
+          ->  Index Scan using idx_rewards_user_status_expiry on rewards rewards_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.009..0.010 rows=2.00 loops=1)
+                Index Cond: ((user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text))
+                Index Searches: 1
+                Buffers: shared hit=4
+  ->  Index Scan using rewards_pkey on rewards  (cost=0.29..8.31 rows=1 width=72) (actual time=0.020..0.021 rows=1.00 loops=1)
+        Index Cond: (reward_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=9
+Planning:
+  Buffers: shared hit=169
+Planning Time: 0.255 ms
+Execution Time: 0.135 ms

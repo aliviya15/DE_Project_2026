@@ -1,0 +1,27 @@
+=== R10 run 1 ===
+Index Scan using idx_rewards_user_status_expiry on rewards  (cost=0.29..8.31 rows=1 width=35) (actual time=0.025..0.026 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Index Searches: 1
+  Buffers: shared hit=4 dirtied=1
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.319 ms
+Execution Time: 0.043 ms
+=== R10 run 2 ===
+Index Scan using idx_rewards_user_status_expiry on rewards  (cost=0.29..8.31 rows=1 width=35) (actual time=0.010..0.011 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.272 ms
+Execution Time: 0.029 ms
+=== R10 run 3 ===
+Index Scan using idx_rewards_user_status_expiry on rewards  (cost=0.29..8.31 rows=1 width=35) (actual time=0.010..0.011 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND ((status)::text = 'UNSCRATCHED'::text) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.295 ms
+Execution Time: 0.030 ms

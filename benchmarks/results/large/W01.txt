@@ -1,0 +1,21 @@
+=== W01 run 1 ===
+Insert on transactions  (cost=0.00..0.01 rows=0 width=0) (actual time=1.793..1.794 rows=0.00 loops=1)
+  Buffers: shared hit=192 read=11 dirtied=7
+  ->  Result  (cost=0.00..0.01 rows=1 width=1064) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning Time: 0.036 ms
+Trigger for constraint transactions_merchant_id_fkey: time=0.300 calls=1
+Execution Time: 2.104 ms
+=== W01 run 2 ===
+Insert on transactions  (cost=0.00..0.01 rows=0 width=0) (actual time=0.202..0.202 rows=0.00 loops=1)
+  Buffers: shared hit=204 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=1064) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning Time: 0.034 ms
+Trigger for constraint transactions_merchant_id_fkey: time=0.279 calls=1
+Execution Time: 0.491 ms
+=== W01 run 3 ===
+Insert on transactions  (cost=0.00..0.01 rows=0 width=0) (actual time=0.203..0.203 rows=0.00 loops=1)
+  Buffers: shared hit=204 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=1064) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning Time: 0.035 ms
+Trigger for constraint transactions_merchant_id_fkey: time=0.279 calls=1
+Execution Time: 0.494 ms

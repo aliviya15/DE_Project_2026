@@ -1,0 +1,69 @@
+=== R16 run 1 ===
+Sort  (cost=990.93..991.21 rows=114 width=55) (actual time=0.701..0.702 rows=75.00 loops=1)
+  Sort Key: d.raised_at
+  Sort Method: quicksort  Memory: 30kB
+  Buffers: shared hit=303 read=5
+  ->  Nested Loop  (cost=5.87..987.03 rows=114 width=55) (actual time=0.416..0.683 rows=75.00 loops=1)
+        Buffers: shared hit=300 read=5
+        ->  Bitmap Heap Scan on disputes d  (cost=5.45..61.16 rows=114 width=44) (actual time=0.403..0.549 rows=75.00 loops=1)
+              Recheck Cond: (((status)::text = 'OPEN'::text) AND (raised_at < '2026-06-23 00:00:00+05:30'::timestamp with time zone))
+              Heap Blocks: exact=3
+              Buffers: shared read=5
+              ->  Bitmap Index Scan on idx_disputes_status_raised  (cost=0.00..5.42 rows=114 width=0) (actual time=0.241..0.241 rows=75.00 loops=1)
+                    Index Cond: (((status)::text = 'OPEN'::text) AND (raised_at < '2026-06-23 00:00:00+05:30'::timestamp with time zone))
+                    Index Searches: 1
+                    Buffers: shared read=2
+        ->  Index Scan using transactions_pkey on transactions t  (cost=0.42..8.12 rows=1 width=27) (actual time=0.002..0.002 rows=1.00 loops=75)
+              Index Cond: (txn_id = d.txn_id)
+              Index Searches: 75
+              Buffers: shared hit=300
+Planning:
+  Buffers: shared hit=398 read=3
+Planning Time: 1.160 ms
+Execution Time: 0.727 ms
+=== R16 run 2 ===
+Sort  (cost=990.93..991.21 rows=114 width=55) (actual time=0.155..0.157 rows=75.00 loops=1)
+  Sort Key: d.raised_at
+  Sort Method: quicksort  Memory: 30kB
+  Buffers: shared hit=308
+  ->  Nested Loop  (cost=5.87..987.03 rows=114 width=55) (actual time=0.017..0.140 rows=75.00 loops=1)
+        Buffers: shared hit=305
+        ->  Bitmap Heap Scan on disputes d  (cost=5.45..61.16 rows=114 width=44) (actual time=0.011..0.016 rows=75.00 loops=1)
+              Recheck Cond: (((status)::text = 'OPEN'::text) AND (raised_at < '2026-06-23 00:00:00+05:30'::timestamp with time zone))
+              Heap Blocks: exact=3
+              Buffers: shared hit=5
+              ->  Bitmap Index Scan on idx_disputes_status_raised  (cost=0.00..5.42 rows=114 width=0) (actual time=0.008..0.008 rows=75.00 loops=1)
+                    Index Cond: (((status)::text = 'OPEN'::text) AND (raised_at < '2026-06-23 00:00:00+05:30'::timestamp with time zone))
+                    Index Searches: 1
+                    Buffers: shared hit=2
+        ->  Index Scan using transactions_pkey on transactions t  (cost=0.42..8.12 rows=1 width=27) (actual time=0.002..0.002 rows=1.00 loops=75)
+              Index Cond: (txn_id = d.txn_id)
+              Index Searches: 75
+              Buffers: shared hit=300
+Planning:
+  Buffers: shared hit=401
+Planning Time: 0.555 ms
+Execution Time: 0.180 ms
+=== R16 run 3 ===
+Sort  (cost=990.93..991.21 rows=114 width=55) (actual time=0.173..0.175 rows=75.00 loops=1)
+  Sort Key: d.raised_at
+  Sort Method: quicksort  Memory: 30kB
+  Buffers: shared hit=308
+  ->  Nested Loop  (cost=5.87..987.03 rows=114 width=55) (actual time=0.018..0.153 rows=75.00 loops=1)
+        Buffers: shared hit=305
+        ->  Bitmap Heap Scan on disputes d  (cost=5.45..61.16 rows=114 width=44) (actual time=0.011..0.016 rows=75.00 loops=1)
+              Recheck Cond: (((status)::text = 'OPEN'::text) AND (raised_at < '2026-06-23 00:00:00+05:30'::timestamp with time zone))
+              Heap Blocks: exact=3
+              Buffers: shared hit=5
+              ->  Bitmap Index Scan on idx_disputes_status_raised  (cost=0.00..5.42 rows=114 width=0) (actual time=0.008..0.008 rows=75.00 loops=1)
+                    Index Cond: (((status)::text = 'OPEN'::text) AND (raised_at < '2026-06-23 00:00:00+05:30'::timestamp with time zone))
+                    Index Searches: 1
+                    Buffers: shared hit=2
+        ->  Index Scan using transactions_pkey on transactions t  (cost=0.42..8.12 rows=1 width=27) (actual time=0.002..0.002 rows=1.00 loops=75)
+              Index Cond: (txn_id = d.txn_id)
+              Index Searches: 75
+              Buffers: shared hit=300
+Planning:
+  Buffers: shared hit=401
+Planning Time: 0.626 ms
+Execution Time: 0.201 ms

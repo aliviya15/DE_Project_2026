@@ -1,0 +1,27 @@
+=== R11 run 1 ===
+Index Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..34.40 rows=464 width=20) (actual time=0.023..0.048 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Index Searches: 1
+  Buffers: shared hit=6 dirtied=4
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.268 ms
+Execution Time: 0.067 ms
+=== R11 run 2 ===
+Index Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..34.40 rows=464 width=20) (actual time=0.006..0.015 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Index Searches: 1
+  Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.296 ms
+Execution Time: 0.036 ms
+=== R11 run 3 ===
+Index Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..34.40 rows=464 width=20) (actual time=0.005..0.012 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Index Searches: 1
+  Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.246 ms
+Execution Time: 0.031 ms
